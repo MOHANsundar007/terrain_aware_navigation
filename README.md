@@ -42,6 +42,10 @@ terrain_aware_navigation/
 │   ├── src/elevation_mapper_node.cpp
 │   ├── test/                    # gtest on synthetic terrain
 │   └── scripts/save_map_snapshot.py
+├── terrain_nav_navigation/      # Nav2 configs + full-stack bringup
+│   ├── config/nav2_default.yaml # Baseline: 2D obstacle layer (LiDAR ring)
+│   ├── launch/bringup.launch.py # Gazebo + EKF + mapping + Nav2 + RViz
+│   └── rviz/nav.rviz
 ├── terrain_nav_localization/    # robot_localization
 │   ├── config/ekf.yaml          # Local EKF, global EKF, navsat_transform
 │   └── launch/localization.launch.py
@@ -129,6 +133,22 @@ ros2 launch terrain_nav_mapping mapping.launch.py
 ros2 run terrain_nav_mapping save_map_snapshot.py --out map.png
 ```
 
+## Navigation
+
+`terrain_nav_navigation/launch/bringup.launch.py` starts the whole stack:
+Gazebo, both EKFs, the elevation mapper, Nav2 and RViz.
+
+The baseline (`mode:=default`) is a typical flat-world Nav2 setup:
+- Navfn (A*) global planner with unknown space allowed
+- Regulated Pure Pursuit controller at 0.6 m/s
+- obstacle layer on `/lidar/scan` (the horizontal ring of the 3D LiDAR) plus inflation
+
+```bash
+ros2 launch terrain_nav_navigation bringup.launch.py mode:=default x:=-30 y:=20
+```
+
+Use **2D Goal Pose** in RViz. The `map` frame starts at the spawn pose.
+
 ## Build
 
 ```bash
@@ -188,3 +208,4 @@ See [docs/roadmap.md](docs/roadmap.md).
 - [x] **Day 2**: Generated outdoor terrain with rock field, ditch, gentle ridge, steep hill
 - [x] **Day 3**: 3D EKF localization (wheel odom + IMU + GPS), ground-truth odometry
 - [x] **Day 4**: Elevation map and traversability layers (slope, roughness, step)
+- [x] **Day 5**: Baseline Nav2 bringup with 2D costmaps

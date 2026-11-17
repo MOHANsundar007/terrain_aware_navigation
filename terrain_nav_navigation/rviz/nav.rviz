@@ -1,0 +1,97 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Tool Properties
+    Name: Tool Properties
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 1
+      Plane Cell Count: 60
+      Color: 160; 160; 164
+      Alpha: 0.3
+    - Class: rviz_default_plugins/RobotModel
+      Name: RobotModel
+      Enabled: true
+      Description Source: Topic
+      Description Topic:
+        Value: /robot_description
+    - Class: grid_map_rviz_plugin/GridMap
+      Name: Traversability
+      Enabled: true
+      Topic:
+        Value: /elevation_map
+        Durability Policy: Transient Local
+      Height Layer: elevation
+      Height Transformer: Layer
+      Color Transformer: ColorLayer
+      Color Layer: traversability
+      Use Rainbow: false
+      Invert Rainbow: false
+      Min Color: 0; 170; 0
+      Max Color: 220; 0; 0
+      Autocompute Intensity Bounds: false
+      Min Intensity: 0
+      Max Intensity: 1
+      Alpha: 0.85
+      Show Grid Lines: false
+    - Class: rviz_default_plugins/Map
+      Name: Global Costmap
+      Enabled: true
+      Topic:
+        Value: /global_costmap/costmap
+      Color Scheme: costmap
+      Alpha: 0.4
+    - Class: rviz_default_plugins/Map
+      Name: Local Costmap
+      Enabled: false
+      Topic:
+        Value: /local_costmap/costmap
+      Color Scheme: costmap
+      Alpha: 0.5
+    - Class: rviz_default_plugins/Path
+      Name: Global Plan
+      Enabled: true
+      Topic:
+        Value: /plan
+      Color: 0; 120; 255
+      Line Style: Billboards
+      Line Width: 0.08
+    - Class: rviz_default_plugins/PointCloud2
+      Name: LiDAR
+      Enabled: false
+      Topic:
+        Value: /lidar/points
+        Reliability Policy: Best Effort
+      Style: Points
+      Size (Pixels): 2
+      Color Transformer: AxisColor
+    - Class: rviz_default_plugins/Pose
+      Name: Goal
+      Enabled: true
+      Topic:
+        Value: /goal_pose
+      Shape: Arrow
+      Color: 255; 0; 255
+  Global Options:
+    Fixed Frame: map
+    Frame Rate: 30
+  Tools:
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/SetGoal
+      Topic:
+        Value: /goal_pose
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Target Frame: base_footprint
+      Distance: 18
+      Pitch: 0.9
+      Yaw: 3.4
+Window Geometry:
+  Width: 1500
+  Height: 950
