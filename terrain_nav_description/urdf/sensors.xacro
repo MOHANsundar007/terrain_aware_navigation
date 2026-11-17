@@ -120,9 +120,10 @@
         <ignition_frame_id>gps_link</ignition_frame_id>
         <update_rate>5</update_rate>
         <always_on>true</always_on>
+
         <navsat>
           <position_sensing>
-            <horizontal><noise type="gaussian"><mean>0</mean><stddev>0.3</stddev></noise></horizontal>
+            <horizontal><noise type="gaussian"><mean>0</mean><stddev>3e-6</stddev></noise></horizontal>
             <vertical><noise type="gaussian"><mean>0</mean><stddev>0.5</stddev></noise></vertical>
           </position_sensing>
         </navsat>
