@@ -1,0 +1,18 @@
+elevation_mapper:
+  ros__parameters:
+    use_sim_time: true
+    map_frame: odom
+    robot_frame: base_footprint
+    map_length: 40.0
+    resolution: 0.2
+    min_range: 0.9
+    max_range: 12.0
+    ema_alpha: 0.5
+    publish_rate: 2.0
+
+    slope_crit_deg: 20.0
+    step_crit: 0.15
+    roughness_crit: 0.08
+    plane_window: 5
+    step_window: 3
+    min_valid_cells: 6

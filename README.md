@@ -37,6 +37,11 @@ terrain_aware_navigation/
 │   ├── config/scenarios.yaml    # Start/goal pair per test area
 │   ├── config/bridge.yaml       # ROS <-> Gazebo topic bridge
 │   └── launch/sim.launch.py     # Gazebo + robot + bridge + RViz
+├── terrain_nav_mapping/         # Elevation + traversability (C++, grid_map)
+│   ├── src/traversability.cpp   # Slope / roughness / step / cost
+│   ├── src/elevation_mapper_node.cpp
+│   ├── test/                    # gtest on synthetic terrain
+│   └── scripts/save_map_snapshot.py
 ├── terrain_nav_localization/    # robot_localization
 │   ├── config/ekf.yaml          # Local EKF, global EKF, navsat_transform
 │   └── launch/localization.launch.py
@@ -101,6 +106,29 @@ To regenerate the terrain (and the map image):
 python3 terrain_nav_gazebo/scripts/generate_terrain.py --preview
 ```
 
+## Elevation and traversability mapping
+
+`elevation_mapper_node` (C++) turns `/lidar/points` into a 40 m x 40 m,
+0.2 m `grid_map` that stays centred on the robot, in the `odom` frame:
+
+1. Transform each cloud into `odom` and drop self-hits (< 0.9 m) and sparse far points (> 12 m).
+2. Keep the highest point per cell for each scan, then blend it into the map (EMA, alpha = 0.5).
+3. At 2 Hz, compute per cell:
+   - **slope**: angle of a least-squares plane over 1.0 m x 1.0 m
+   - **roughness**: RMS residual of that plane
+   - **step**: max - min height over 0.6 m x 0.6 m
+   - **traversability** = `clamp(max(slope/20°, roughness/0.08 m, step/0.15 m), 0, 1)`
+4. Publish `grid_map_msgs/GridMap` on `/elevation_map`.
+
+One dangerous term is enough to make a cell lethal. The gentle 11° ridge
+costs about 0.55 (passable), while rocks, ditch walls and the steep hill
+reach 1.0. Limits are in `terrain_nav_mapping/config/elevation_mapper.yaml`.
+
+```bash
+ros2 launch terrain_nav_mapping mapping.launch.py
+ros2 run terrain_nav_mapping save_map_snapshot.py --out map.png
+```
+
 ## Build
 
 ```bash
@@ -144,10 +172,13 @@ ros2 launch terrain_nav_description display.launch.py
 ## Testing
 
 ```bash
-colcon test --packages-select terrain_nav_description && colcon test-result --verbose
+colcon test --packages-select terrain_nav_description terrain_nav_mapping
+colcon test-result --verbose
 ```
 
-This expands the xacro and checks the result with `check_urdf`.
+- `terrain_nav_description`: expands the xacro and runs `check_urdf`
+- `terrain_nav_mapping`: gtest for flat ground, a 10° plane (slope and cost
+  0.5), a 30 cm ledge (lethal) and unknown cells
 
 ## Progress
 
@@ -156,3 +187,4 @@ See [docs/roadmap.md](docs/roadmap.md).
 - [x] **Day 1**: Repo structure, robot URDF (LiDAR/IMU/GPS), baseline world, simulation launch
 - [x] **Day 2**: Generated outdoor terrain with rock field, ditch, gentle ridge, steep hill
 - [x] **Day 3**: 3D EKF localization (wheel odom + IMU + GPS), ground-truth odometry
+- [x] **Day 4**: Elevation map and traversability layers (slope, roughness, step)
