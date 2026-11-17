@@ -6,6 +6,10 @@ traversability map (slope, roughness, step height) and feeds that into a
 custom Nav2 costmap layer, so it avoids steep hills and rocks that a flat
 2D costmap cannot see.
 
+> **Status:** work in progress. Simulation, localization, elevation and
+> traversability mapping, and the baseline Nav2 stack are done. The custom
+> costmap layer and the benchmark are next (see [Progress](#progress)).
+
 | | |
 |---|---|
 | ROS distro | ROS 2 Humble |
@@ -153,7 +157,7 @@ Use **2D Goal Pose** in RViz. The `map` frame starts at the spawn pose.
 
 ```bash
 mkdir -p ~/terrain_nav_ws/src && cd ~/terrain_nav_ws/src
-git clone <this-repo-url> terrain_aware_navigation
+git clone https://github.com/MOHANsundar007/terrain_aware_navigation.git
 cd ~/terrain_nav_ws
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
@@ -209,3 +213,6 @@ See [docs/roadmap.md](docs/roadmap.md).
 - [x] **Day 3**: 3D EKF localization (wheel odom + IMU + GPS), ground-truth odometry
 - [x] **Day 4**: Elevation map and traversability layers (slope, roughness, step)
 - [x] **Day 5**: Baseline Nav2 bringup with 2D costmaps
+- [ ] **Day 6**: Custom C++ Nav2 costmap layer from traversability
+- [ ] **Day 7**: Terrain-aware Nav2 configuration
+- [ ] **Day 8**: Benchmark: default vs terrain-aware (success rate, path length, max tilt)
