@@ -6,14 +6,13 @@ Each step is one small feature that works and can be tested on its own.
 |---|---|---|---|
 | 1 | Repo structure, rover URDF with sensors, flat world, sim launch | `terrain_nav_description`, `terrain_nav_gazebo` | Done |
 | 2 | Terrain world: generated mesh with rocks, ditch, ridge, hill | `terrain_nav_gazebo` | Done |
-| 3 | Teleop + slope-driving sanity check (tilt from IMU) | `terrain_nav_gazebo` | Planned |
-| 4 | EKF: wheel odom + IMU (local), then + GPS via `navsat_transform` (global) | `terrain_nav_localization` | Planned |
-| 5 | Elevation map from 3D LiDAR with `grid_map` | `terrain_nav_mapping` | Planned |
-| 6 | Traversability layers: slope, roughness, step height | `terrain_nav_mapping` | Planned |
-| 7 | Baseline Nav2 bringup (default costmaps) | `terrain_nav_navigation` | Planned |
-| 8 | Custom C++ costmap layer from traversability | `terrain_costmap_plugin` | Planned |
-| 9 | Terrain-aware Nav2 config using the plugin | `terrain_nav_navigation` | Planned |
-| 10 | Benchmark: default vs terrain-aware (success rate, path length, max tilt) | `terrain_nav_benchmark` | Planned |
+| 3 | EKF: wheel odom + IMU (local), then + GPS via `navsat_transform` (global) | `terrain_nav_localization` | Done |
+| 4 | Elevation map from 3D LiDAR with `grid_map` | `terrain_nav_mapping` | Planned |
+| 5 | Traversability layers: slope, roughness, step height | `terrain_nav_mapping` | Planned |
+| 6 | Baseline Nav2 bringup (default costmaps) | `terrain_nav_navigation` | Planned |
+| 7 | Custom C++ costmap layer from traversability | `terrain_costmap_plugin` | Planned |
+| 8 | Terrain-aware Nav2 config using the plugin | `terrain_nav_navigation` | Planned |
+| 9 | Benchmark: default vs terrain-aware (success rate, path length, max tilt) | `terrain_nav_benchmark` | Planned |
 
 ## Day 1 verification
 

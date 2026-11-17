@@ -37,6 +37,9 @@ terrain_aware_navigation/
 │   ├── config/scenarios.yaml    # Start/goal pair per test area
 │   ├── config/bridge.yaml       # ROS <-> Gazebo topic bridge
 │   └── launch/sim.launch.py     # Gazebo + robot + bridge + RViz
+├── terrain_nav_localization/    # robot_localization
+│   ├── config/ekf.yaml          # Local EKF, global EKF, navsat_transform
+│   └── launch/localization.launch.py
 └── docs/roadmap.md
 ```
 
@@ -51,11 +54,30 @@ terrain_aware_navigation/
 | IMU | `imu` | `/imu/data` | `sensor_msgs/Imu` | 100 Hz |
 | GPS | `navsat` | `/gps/fix` | `sensor_msgs/NavSatFix` | 5 Hz |
 
-Other topics: `/cmd_vel` (in), `/odom`, `/joint_states`, `/tf`, `/clock`.
+Other topics: `/cmd_vel` (in), `/odom` (wheel odometry), `/joint_states`,
+`/tf`, `/clock`, `/ground_truth/odom` (Gazebo world pose, used only for
+evaluation).
 
-TF tree: `odom -> base_footprint -> base_link -> {wheels, lidar_link, imu_link, gps_link}`.
-For now the Gazebo drive plugin publishes `odom -> base_footprint`. That
-transform will move to the EKF once localization is added.
+## Localization
+
+Two `robot_localization` EKFs run in full 3D (`two_d_mode: false`), because
+z, roll and pitch matter on hills:
+
+| Node | Inputs | Output | TF |
+|---|---|---|---|
+| `ekf_local` | wheel odom (vx, vy, vz) + IMU (roll, pitch, yaw, rates) | `/odometry/local` | `odom -> base_footprint` |
+| `navsat_transform` | `/gps/fix` + IMU + `/odometry/global` | `/odometry/gps` | |
+| `ekf_global` | the above + GPS x/y | `/odometry/global` | `map -> odom` |
+
+TF tree: `map -> odom -> base_footprint -> base_link -> {wheels, lidar_link, imu_link, gps_link}`.
+
+After 24 m of curved driving across the ridge, the global estimate is about
+0.4 m from ground truth.
+
+```bash
+ros2 launch terrain_nav_gazebo sim.launch.py publish_odom_tf:=false
+ros2 launch terrain_nav_localization localization.launch.py
+```
 
 ## Test terrain
 
@@ -105,7 +127,7 @@ ros2 launch terrain_nav_gazebo sim.launch.py x:=10 y:=20
 ```
 
 Launch arguments: `world:=<abs path>`, `headless:=true`, `rviz:=false`,
-`x:= y:= z:= yaw:=` (spawn pose).
+`publish_odom_tf:=false` (when the EKF runs), `x:= y:= z:= yaw:=` (spawn pose).
 
 Drive it:
 
@@ -133,3 +155,4 @@ See [docs/roadmap.md](docs/roadmap.md).
 
 - [x] **Day 1**: Repo structure, robot URDF (LiDAR/IMU/GPS), baseline world, simulation launch
 - [x] **Day 2**: Generated outdoor terrain with rock field, ditch, gentle ridge, steep hill
+- [x] **Day 3**: 3D EKF localization (wheel odom + IMU + GPS), ground-truth odometry

@@ -39,6 +39,9 @@ def generate_launch_description():
             description='Run Gazebo server only (no GUI)'),
         DeclareLaunchArgument(
             'rviz', default_value='true', description='Start RViz'),
+        DeclareLaunchArgument(
+            'publish_odom_tf', default_value='true',
+            description='Gazebo publishes odom->base_footprint (false when the EKF runs)'),
         DeclareLaunchArgument('x', default_value='0.0'),
         DeclareLaunchArgument('y', default_value='0.0'),
         DeclareLaunchArgument('z', default_value='0.3'),
@@ -46,7 +49,8 @@ def generate_launch_description():
     ]
 
     robot_description = ParameterValue(
-        Command(['xacro ', os.path.join(desc_pkg, 'urdf', 'rover.urdf.xacro')]),
+        Command(['xacro ', os.path.join(desc_pkg, 'urdf', 'rover.urdf.xacro'),
+                 ' publish_odom_tf:=', LaunchConfiguration('publish_odom_tf')]),
         value_type=str)
 
     gz_args = PythonExpression([
