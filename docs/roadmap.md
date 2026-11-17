@@ -5,7 +5,7 @@ Each step is one small feature that works and can be tested on its own.
 | # | Feature | Packages | Status |
 |---|---|---|---|
 | 1 | Repo structure, rover URDF with sensors, flat world, sim launch | `terrain_nav_description`, `terrain_nav_gazebo` | Done |
-| 2 | Terrain world: heightmap hills, slopes, scattered rocks | `terrain_nav_gazebo` | Planned |
+| 2 | Terrain world: generated mesh with rocks, ditch, ridge, hill | `terrain_nav_gazebo` | Done |
 | 3 | Teleop + slope-driving sanity check (tilt from IMU) | `terrain_nav_gazebo` | Planned |
 | 4 | EKF: wheel odom + IMU (local), then + GPS via `navsat_transform` (global) | `terrain_nav_localization` | Planned |
 | 5 | Elevation map from 3D LiDAR with `grid_map` | `terrain_nav_mapping` | Planned |

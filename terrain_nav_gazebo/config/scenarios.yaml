@@ -1,0 +1,5 @@
+scenarios:
+  rock_field:   {start: [-30.0,  20.0, 0.0], goal: [-10.0,  20.0]}
+  ditch:        {start: [ 10.0,  20.0, 0.0], goal: [ 30.0,  20.0]}
+  gentle_ridge: {start: [-30.0, -20.0, 0.0], goal: [ -6.0, -20.0]}
+  steep_hill:   {start: [  8.0, -20.0, 0.0], goal: [ 32.0, -20.0]}

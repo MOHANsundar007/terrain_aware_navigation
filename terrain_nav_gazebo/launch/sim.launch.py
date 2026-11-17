@@ -2,7 +2,11 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import (
+    AppendEnvironmentVariable,
+    DeclareLaunchArgument,
+    IncludeLaunchDescription,
+)
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
@@ -28,7 +32,7 @@ def generate_launch_description():
     declare_args = [
         DeclareLaunchArgument(
             'world',
-            default_value=os.path.join(gazebo_pkg, 'worlds', 'empty_terrain.sdf'),
+            default_value=os.path.join(gazebo_pkg, 'worlds', 'outdoor_terrain.sdf'),
             description='Absolute path to the SDF world file'),
         DeclareLaunchArgument(
             'headless', default_value='false',
@@ -90,7 +94,11 @@ def generate_launch_description():
         condition=IfCondition(rviz),
     )
 
+    resource_path = AppendEnvironmentVariable(
+        'IGN_GAZEBO_RESOURCE_PATH', os.path.join(gazebo_pkg, 'models'))
+
     return LaunchDescription(declare_args + [
+        resource_path,
         gazebo,
         robot_state_publisher,
         spawn_robot,

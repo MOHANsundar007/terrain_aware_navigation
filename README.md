@@ -29,7 +29,12 @@ terrain_aware_navigation/
 │   ├── launch/display.launch.py # Model in RViz only
 │   └── rviz/rover.rviz
 ├── terrain_nav_gazebo/          # Simulation
-│   ├── worlds/empty_terrain.sdf # Flat, geo-referenced baseline world
+│   ├── worlds/
+│   │   ├── outdoor_terrain.sdf  # 80 m x 80 m test terrain (default)
+│   │   └── empty_terrain.sdf    # Flat, geo-referenced baseline world
+│   ├── models/outdoor_terrain/  # Generated terrain mesh + rocks
+│   ├── scripts/generate_terrain.py
+│   ├── config/scenarios.yaml    # Start/goal pair per test area
 │   ├── config/bridge.yaml       # ROS <-> Gazebo topic bridge
 │   └── launch/sim.launch.py     # Gazebo + robot + bridge + RViz
 └── docs/roadmap.md
@@ -52,6 +57,28 @@ TF tree: `odom -> base_footprint -> base_link -> {wheels, lidar_link, imu_link, 
 For now the Gazebo drive plugin publishes `odom -> base_footprint`. That
 transform will move to the EKF once localization is added.
 
+## Test terrain
+
+![terrain map](docs/images/terrain_map.png)
+
+`scripts/generate_terrain.py` builds the terrain from a fixed seed, so every
+run sees the same world. Each quadrant targets one failure mode of a flat 2D
+costmap:
+
+| Area | Hazard | Why a 2D LiDAR ring misses it |
+|---|---|---|
+| `rock_field` (NW) | 45 rocks sticking out 0.22-0.32 m | Rocks sit below the 0.42 m scan plane but above the 0.14 m ground clearance |
+| `ditch` (NE) | 1 m deep, 2 m wide trench | Negative obstacles return no hits in a horizontal scan |
+| `gentle_ridge` (SW) | 0.9 m ridge, ~11° slopes, **safe to cross** | Rising ground shows up as a false wall |
+| `steep_hill` (SE) | 2.5 m hill, up to ~27° | Only the upper part is seen, so the robot clips the steep flanks |
+
+Start/goal pairs are in `terrain_nav_gazebo/config/scenarios.yaml`.
+To regenerate the terrain (and the map image):
+
+```bash
+python3 terrain_nav_gazebo/scripts/generate_terrain.py --preview
+```
+
 ## Build
 
 ```bash
@@ -69,6 +96,12 @@ Gazebo, the robot and RViz:
 
 ```bash
 ros2 launch terrain_nav_gazebo sim.launch.py
+```
+
+Spawn in a test area, e.g. in front of the ditch:
+
+```bash
+ros2 launch terrain_nav_gazebo sim.launch.py x:=10 y:=20
 ```
 
 Launch arguments: `world:=<abs path>`, `headless:=true`, `rviz:=false`,
@@ -99,3 +132,4 @@ This expands the xacro and checks the result with `check_urdf`.
 See [docs/roadmap.md](docs/roadmap.md).
 
 - [x] **Day 1**: Repo structure, robot URDF (LiDAR/IMU/GPS), baseline world, simulation launch
+- [x] **Day 2**: Generated outdoor terrain with rock field, ditch, gentle ridge, steep hill
