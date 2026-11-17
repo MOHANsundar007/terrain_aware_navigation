@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="rover_sensors">
+
+    <link name="lidar_link">
+      <visual>
+        <geometry><cylinder radius="0.05" length="0.07"/></geometry>
+        <material name="sensor_grey"/>
+      </visual>
+      <collision>
+        <geometry><cylinder radius="0.05" length="0.07"/></geometry>
+      </collision>
+      <xacro:sensor_inertia m="0.5"/>
+    </link>
+
+    <joint name="lidar_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="lidar_link"/>
+      <origin xyz="0.15 0 ${chassis_z_offset + chassis_height / 2 + 0.10}" rpy="0 0 0"/>
+    </joint>
+
+    <link name="lidar_mast">
+      <visual>
+        <geometry><cylinder radius="0.015" length="0.065"/></geometry>
+        <material name="sensor_grey"/>
+      </visual>
+    </link>
+    <joint name="lidar_mast_joint" type="fixed">
+      <parent link="lidar_link"/>
+      <child link="lidar_mast"/>
+      <origin xyz="0 0 -0.0675" rpy="0 0 0"/>
+    </joint>
+
+    <gazebo reference="lidar_link">
+      <sensor name="lidar" type="gpu_lidar">
+        <topic>lidar</topic>
+        <ignition_frame_id>lidar_link</ignition_frame_id>
+        <update_rate>10</update_rate>
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>900</samples>
+              <resolution>1</resolution>
+              <min_angle>${-pi}</min_angle>
+              <max_angle>${pi}</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>16</samples>
+              <resolution>1</resolution>
+              <min_angle>${-15 * pi / 180}</min_angle>
+              <max_angle>${15 * pi / 180}</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>30.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </lidar>
+      </sensor>
+    </gazebo>
+
+    <link name="imu_link">
+      <xacro:sensor_inertia m="0.05"/>
+    </link>
+
+    <joint name="imu_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="imu_link"/>
+      <origin xyz="0 0 ${chassis_z_offset}" rpy="0 0 0"/>
+    </joint>
+
+    <gazebo reference="imu_link">
+      <sensor name="imu" type="imu">
+        <topic>imu</topic>
+        <ignition_frame_id>imu_link</ignition_frame_id>
+        <update_rate>100</update_rate>
+        <always_on>true</always_on>
+        <imu>
+          <angular_velocity>
+            <x><noise type="gaussian"><mean>0</mean><stddev>0.002</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0</mean><stddev>0.002</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0</mean><stddev>0.002</stddev></noise></z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x><noise type="gaussian"><mean>0</mean><stddev>0.02</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0</mean><stddev>0.02</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0</mean><stddev>0.02</stddev></noise></z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+    </gazebo>
+
+    <link name="gps_link">
+      <visual>
+        <geometry><box size="0.06 0.06 0.02"/></geometry>
+        <material name="sensor_grey"/>
+      </visual>
+      <xacro:sensor_inertia m="0.05"/>
+    </link>
+
+    <joint name="gps_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="gps_link"/>
+      <origin xyz="-0.25 0 ${chassis_z_offset + chassis_height / 2 + 0.01}" rpy="0 0 0"/>
+    </joint>
+
+    <gazebo reference="gps_link">
+      <sensor name="gps" type="navsat">
+        <topic>gps/fix</topic>
+        <ignition_frame_id>gps_link</ignition_frame_id>
+        <update_rate>5</update_rate>
+        <always_on>true</always_on>
+        <navsat>
+          <position_sensing>
+            <horizontal><noise type="gaussian"><mean>0</mean><stddev>0.3</stddev></noise></horizontal>
+            <vertical><noise type="gaussian"><mean>0</mean><stddev>0.5</stddev></noise></vertical>
+          </position_sensing>
+        </navsat>
+      </sensor>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

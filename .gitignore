@@ -1,0 +1,15 @@
+build/
+install/
+log/
+
+__pycache__/
+*.pyc
+
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+results/
+*.bag
+*.db3

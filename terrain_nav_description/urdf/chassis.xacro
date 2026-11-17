@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="rover_chassis">
+
+    <link name="base_footprint"/>
+
+    <link name="base_link">
+      <visual>
+        <origin xyz="0 0 ${chassis_z_offset}" rpy="0 0 0"/>
+        <geometry><box size="${chassis_length} ${chassis_width} ${chassis_height}"/></geometry>
+        <material name="rover_orange"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 ${chassis_z_offset}" rpy="0 0 0"/>
+        <geometry><box size="${chassis_length} ${chassis_width} ${chassis_height}"/></geometry>
+      </collision>
+      <xacro:box_inertia m="${chassis_mass}" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
+        <origin xyz="0 0 ${chassis_z_offset}" rpy="0 0 0"/>
+      </xacro:box_inertia>
+    </link>
+
+    <joint name="base_footprint_joint" type="fixed">
+      <parent link="base_footprint"/>
+      <child link="base_link"/>
+      <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0"/>
+    </joint>
+
+    <gazebo reference="base_link">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>
