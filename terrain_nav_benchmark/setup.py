@@ -17,6 +17,7 @@ setup(
     entry_points={
         'console_scripts': [
             'run_benchmark = terrain_nav_benchmark.run_benchmark:main',
+            'record_demo = terrain_nav_benchmark.record_demo:main',
         ],
     },
 )
