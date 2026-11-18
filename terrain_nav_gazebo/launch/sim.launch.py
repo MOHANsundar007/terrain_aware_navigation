@@ -42,6 +42,9 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'publish_odom_tf', default_value='true',
             description='Gazebo publishes odom->base_footprint (false when the EKF runs)'),
+        DeclareLaunchArgument(
+            'demo_camera', default_value='false',
+            description='Add the chase camera used to record demo videos'),
         DeclareLaunchArgument('x', default_value='0.0'),
         DeclareLaunchArgument('y', default_value='0.0'),
         DeclareLaunchArgument('z', default_value='0.3'),
@@ -50,7 +53,8 @@ def generate_launch_description():
 
     robot_description = ParameterValue(
         Command(['xacro ', os.path.join(desc_pkg, 'urdf', 'rover.urdf.xacro'),
-                 ' publish_odom_tf:=', LaunchConfiguration('publish_odom_tf')]),
+                 ' publish_odom_tf:=', LaunchConfiguration('publish_odom_tf'),
+                 ' demo_camera:=', LaunchConfiguration('demo_camera')]),
         value_type=str)
 
     gz_args = PythonExpression([

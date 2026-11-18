@@ -5,7 +5,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 
 
@@ -18,20 +18,28 @@ def _include(pkg, launch_file, args=None):
 
 def generate_launch_description():
     nav_pkg = get_package_share_directory('terrain_nav_navigation')
+    gazebo_pkg = get_package_share_directory('terrain_nav_gazebo')
     lc = LaunchConfiguration
 
     args = [
         DeclareLaunchArgument('mode', default_value='terrain', choices=['terrain', 'default']),
+        DeclareLaunchArgument(
+            'world', default_value='outdoor_terrain',
+            description='World name in terrain_nav_gazebo/worlds (without .sdf)'),
         DeclareLaunchArgument('headless', default_value='false'),
         DeclareLaunchArgument('rviz', default_value='true'),
         DeclareLaunchArgument('x', default_value='-30.0'),
         DeclareLaunchArgument('y', default_value='20.0'),
+        DeclareLaunchArgument('demo_camera', default_value='false'),
+        DeclareLaunchArgument('z', default_value='0.3'),
         DeclareLaunchArgument('yaw', default_value='0.0'),
     ]
 
     sim = _include('terrain_nav_gazebo', 'sim.launch.py', {
         'headless': lc('headless'), 'rviz': 'false', 'publish_odom_tf': 'false',
-        'x': lc('x'), 'y': lc('y'), 'yaw': lc('yaw'),
+        'demo_camera': lc('demo_camera'),
+        'world': PathJoinSubstitution([gazebo_pkg, 'worlds', [lc('world'), '.sdf']]),
+        'x': lc('x'), 'y': lc('y'), 'z': lc('z'), 'yaw': lc('yaw'),
     })
     localization = _include('terrain_nav_localization', 'localization.launch.py')
     mapping = _include('terrain_nav_mapping', 'mapping.launch.py')

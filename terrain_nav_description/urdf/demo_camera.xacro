@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="rover_demo_camera">
+
+    <link name="demo_camera_link">
+      <xacro:sensor_inertia m="0.001"/>
+    </link>
+
+    <joint name="demo_camera_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="demo_camera_link"/>
+      <origin xyz="-3.5 0 2.2" rpy="0 0.5 0"/>
+    </joint>
+
+    <gazebo reference="demo_camera_link">
+      <sensor name="demo_camera" type="camera">
+        <topic>demo_camera</topic>
+        <update_rate>15</update_rate>
+        <always_on>true</always_on>
+        <camera>
+          <horizontal_fov>1.2</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>360</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>120</far>
+          </clip>
+        </camera>
+      </sensor>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

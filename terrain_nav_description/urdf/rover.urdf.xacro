@@ -3,12 +3,14 @@
 <robot name="terrain_rover" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:arg name="publish_odom_tf" default="true"/>
+  <xacro:arg name="demo_camera" default="false"/>
 
   <xacro:include filename="$(find terrain_nav_description)/urdf/properties.xacro"/>
   <xacro:include filename="$(find terrain_nav_description)/urdf/chassis.xacro"/>
   <xacro:include filename="$(find terrain_nav_description)/urdf/wheel.xacro"/>
   <xacro:include filename="$(find terrain_nav_description)/urdf/sensors.xacro"/>
   <xacro:include filename="$(find terrain_nav_description)/urdf/gazebo.xacro"/>
+  <xacro:include filename="$(find terrain_nav_description)/urdf/demo_camera.xacro"/>
 
   <xacro:rover_chassis/>
 
@@ -20,5 +22,9 @@
   <xacro:rover_sensors/>
 
   <xacro:rover_gazebo_plugins publish_odom_tf="$(arg publish_odom_tf)"/>
+
+  <xacro:if value="$(arg demo_camera)">
+    <xacro:rover_demo_camera/>
+  </xacro:if>
 
 </robot>
