@@ -1,0 +1,930 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <model name="hills_terrain">
+    <static>true</static>
+    <link name="ground">
+      <collision name="collision">
+        <geometry><mesh><uri>model://hills_terrain/meshes/terrain.obj</uri></mesh></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="visual">
+        <geometry><mesh><uri>model://hills_terrain/meshes/terrain.obj</uri></mesh></geometry>
+        <material>
+          <ambient>0.35 0.42 0.25 1</ambient>
+          <diffuse>0.42 0.50 0.30 1</diffuse>
+          <specular>0.02 0.02 0.02 1</specular>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_0">
+      <pose>-16.449 -3.868 0.256 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.319</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.319</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_1">
+      <pose>-16.773 -2.172 0.281 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.330</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.330</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_2">
+      <pose>-16.267 -5.234 0.227 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.362</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.362</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_3">
+      <pose>-21.489 -5.363 0.655 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.345</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.345</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_4">
+      <pose>-17.678 -3.531 0.316 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.394</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.394</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_5">
+      <pose>-19.973 -4.002 0.493 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.415</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.415</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_6">
+      <pose>-14.475 -3.922 0.104 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.429</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.429</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_7">
+      <pose>-20.133 -7.720 0.475 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.375</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.375</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_8">
+      <pose>-14.226 -5.209 0.123 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.424</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.424</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_9">
+      <pose>-15.755 -5.934 0.264 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.317</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.317</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_10">
+      <pose>-19.350 -5.811 0.329 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.449</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.449</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_11">
+      <pose>-15.740 -7.669 0.207 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.389</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.389</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_12">
+      <pose>-17.373 -4.855 0.243 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.421</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.421</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_13">
+      <pose>-17.781 -8.708 0.269 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.407</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.407</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_14">
+      <pose>-20.849 -3.660 0.620 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.310</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.310</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_15">
+      <pose>-15.010 -3.003 0.223 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.314</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.314</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_16">
+      <pose>-15.401 -4.469 0.124 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.436</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.436</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_17">
+      <pose>-15.851 -2.421 0.135 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.424</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.424</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_18">
+      <pose>-19.183 -2.923 0.429 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.352</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.352</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_19">
+      <pose>-19.813 -2.128 0.428 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.418</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.418</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_20">
+      <pose>-20.771 -2.653 0.559 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.431</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.431</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_21">
+      <pose>-17.246 -7.631 0.215 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.424</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.424</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_22">
+      <pose>-20.353 -6.158 0.535 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.383</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.383</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_23">
+      <pose>-17.554 -1.266 0.319 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.412</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.412</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_24">
+      <pose>-21.139 -6.745 0.625 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.355</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.355</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_25">
+      <pose>24.365 5.776 0.432 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.443</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.443</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_26">
+      <pose>22.417 3.540 0.648 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.390</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.390</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_27">
+      <pose>21.085 5.241 0.693 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.441</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.441</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_28">
+      <pose>21.823 6.218 0.719 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.327</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.327</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_29">
+      <pose>24.259 7.352 0.437 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.416</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.416</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_30">
+      <pose>25.036 3.446 0.477 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.339</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.339</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_31">
+      <pose>26.312 4.853 0.343 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.423</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.423</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_32">
+      <pose>26.340 3.451 0.370 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.354</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.354</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_33">
+      <pose>21.242 4.158 0.786 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.402</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.402</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_34">
+      <pose>23.353 5.746 0.545 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.394</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.394</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_35">
+      <pose>22.831 4.594 0.624 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.339</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.339</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_36">
+      <pose>22.378 2.499 0.632 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.429</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.429</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_37">
+      <pose>25.085 2.490 0.466 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.304</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.304</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_38">
+      <pose>24.559 4.728 0.396 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.417</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.417</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_39">
+      <pose>22.475 5.494 0.608 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.338</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.338</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_40">
+      <pose>25.910 5.919 0.414 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.371</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.371</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_41">
+      <pose>25.811 6.922 0.425 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.319</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.319</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_42">
+      <pose>24.084 3.659 0.579 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.305</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.305</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_43">
+      <pose>23.675 2.355 0.473 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.395</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.395</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_44">
+      <pose>23.336 7.027 0.521 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.384</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.384</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_45">
+      <pose>23.653 29.242 0.148 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.431</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.431</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_46">
+      <pose>19.605 26.408 0.135 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.346</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.346</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_47">
+      <pose>21.318 27.477 0.195 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.381</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.381</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_48">
+      <pose>25.300 27.614 0.115 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.354</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.354</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_49">
+      <pose>23.305 30.847 0.278 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.377</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.377</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_50">
+      <pose>20.329 28.947 0.270 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.314</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.314</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_51">
+      <pose>22.163 26.750 0.147 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.332</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.332</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_52">
+      <pose>20.005 30.264 0.233 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.365</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.365</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_53">
+      <pose>25.335 28.698 0.126 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.400</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.400</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_54">
+      <pose>19.421 28.275 0.196 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.399</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.399</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_55">
+      <pose>23.550 24.919 -0.010 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.415</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.415</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_56">
+      <pose>21.418 30.301 0.235 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.398</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.398</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_57">
+      <pose>21.598 31.385 0.220 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.392</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.392</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_58">
+      <pose>21.612 25.342 0.015 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.428</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.428</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_59">
+      <pose>20.350 25.046 0.128 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.322</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.322</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_60">
+      <pose>23.592 26.039 0.203 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.313</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.313</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_61">
+      <pose>25.024 26.574 0.042 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.444</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.444</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_62">
+      <pose>24.028 27.236 0.073 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.442</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.442</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_63">
+      <pose>19.117 27.294 0.202 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.330</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.330</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="rock_64">
+      <pose>22.663 28.069 0.180 0 0 0</pose>
+      <collision name="c">
+        <geometry><sphere><radius>0.416</radius></sphere></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><sphere><radius>0.416</radius></sphere></geometry>
+        <material>
+          <ambient>0.45 0.43 0.40 1</ambient>
+          <diffuse>0.50 0.48 0.45 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

@@ -8,7 +8,6 @@ import numpy as np
 
 SIZE = 80.0
 RES = 0.4
-SEED = 7
 
 
 def smoothstep(e0, e1, x):
@@ -16,37 +15,98 @@ def smoothstep(e0, e1, x):
     return t * t * (3.0 - 2.0 * t)
 
 
-def height(x, y):
+def gaussian(x, y, cx, cy, amp, sigma):
+    return amp * np.exp(-((x - cx) ** 2 + (y - cy) ** 2) / (2.0 * sigma ** 2))
+
+
+def place_rocks(rng, n, x_range, y_range, r_range=(0.30, 0.45), exposed=(0.22, 0.32),
+                centre=None, radius=None):
+    rocks = []
+    while len(rocks) < n:
+        x = rng.uniform(*x_range)
+        y = rng.uniform(*y_range)
+        if centre is not None and math.hypot(x - centre[0], y - centre[1]) > radius:
+            continue
+        r = rng.uniform(*r_range)
+        if any((x - a) ** 2 + (y - b) ** 2 < (r + c + 0.15) ** 2 for a, b, c, _ in rocks):
+            continue
+        rocks.append((x, y, r, rng.uniform(*exposed) - r))
+    return rocks
+
+
+def outdoor_height(x, y):
     h = 0.03 * np.sin(0.35 * x) * np.cos(0.27 * y) + 0.02 * np.sin(0.9 * x + 1.3 * y)
 
-    depth = 1.0
     across = 1.0 - smoothstep(0.6, 1.2, np.abs(x - 20.0))
     along = smoothstep(11.0, 12.0, y) * (1.0 - smoothstep(28.0, 29.0, y))
-    h -= depth * across * along
+    h -= 1.0 * across * along
 
-    ridge_h, half_w = 0.9, 7.0
+    half_w = 7.0
     dx = np.abs(x + 18.0)
     profile = np.where(dx < half_w, np.cos(0.5 * math.pi * dx / half_w) ** 2, 0.0)
     span = smoothstep(-37.0, -34.0, y) * (1.0 - smoothstep(-6.0, -3.0, y))
-    h += ridge_h * profile * span
+    h += 0.9 * profile * span
 
-    r2 = (x - 20.0) ** 2 + (y + 20.0) ** 2
-    h += 2.5 * np.exp(-r2 / (2.0 * 3.0 ** 2))
-
+    h += gaussian(x, y, 20.0, -20.0, 2.5, 3.0)
     return h
 
 
-def rock_field(rng):
+def outdoor_rocks():
+    return place_rocks(np.random.default_rng(7), 45, (-25.0, -15.0), (15.5, 24.5))
+
+
+OUTDOOR_GOALS = [
+    ('rock_field',       (-30.0, 20.0),  (-10.0, 20.0)),
+    ('rock_field_diag',  (-30.0, 12.0),  (-10.0, 27.0)),
+    ('ditch',            (10.0, 20.0),   (30.0, 20.0)),
+    ('gentle_ridge',     (-30.0, -20.0), (-6.0, -20.0)),
+    ('steep_hill',       (8.0, -20.0),   (32.0, -20.0)),
+]
+
+
+STEEP_MOUNDS = [
+    (-18.0, -25.0, 2.2, 2.2),
+    (16.0, -22.5, 2.0, 2.0),
+    (22.0, -27.5, 2.0, 2.0),
+    (14.0, 5.0, 2.0, 2.0),
+    (8.0, 28.0, 1.8, 2.0),
+]
+
+
+def hills_height(x, y):
+    rng = np.random.default_rng(11)
+    h = np.zeros_like(x, dtype=float)
+    for _ in range(30):
+        cx, cy = rng.uniform(-38, 38, 2)
+        h += gaussian(x, y, cx, cy, rng.uniform(0.3, 0.9), rng.uniform(4.0, 7.0))
+    for cx, cy, amp, sigma in STEEP_MOUNDS:
+        h += gaussian(x, y, cx, cy, amp, sigma)
+    return h
+
+
+def hills_rocks():
+    rng = np.random.default_rng(23)
     rocks = []
-    while len(rocks) < 45:
-        x = rng.uniform(-25.0, -15.0)
-        y = rng.uniform(15.5, 24.5)
-        r = rng.uniform(0.30, 0.45)
-        if any((x - a) ** 2 + (y - b) ** 2 < (r + c + 0.15) ** 2 for a, b, c, _ in rocks):
-            continue
-        exposed = rng.uniform(0.22, 0.32)
-        rocks.append((x, y, r, exposed - r))
+    rocks += place_rocks(rng, 25, (-22.0, -14.0), (-9.0, -1.0), centre=(-18.0, -5.0), radius=3.8)
+    rocks += place_rocks(rng, 20, (21.0, 27.0), (2.0, 8.0), centre=(24.0, 5.0), radius=3.0)
+    rocks += place_rocks(rng, 20, (18.0, 26.0), (24.0, 32.0), centre=(22.0, 28.0), radius=3.5)
     return rocks
+
+
+HILLS_GOALS = [
+    ('steep_mound',      (-30.0, -25.0), (-6.0, -25.0)),
+    ('boulders',         (-30.0, -5.0),  (-6.0, -5.0)),
+    ('rolling_hills',    (-30.0, 15.0),  (-6.0, 15.0)),
+    ('twin_mounds',      (6.0, -25.0),   (30.0, -25.0)),
+    ('mound_and_rocks',  (4.0, 5.0),     (32.0, 5.0)),
+]
+
+TERRAINS = {
+    'outdoor_terrain': (outdoor_height, outdoor_rocks, OUTDOOR_GOALS,
+                        'Rock field, ditch, gentle ridge and steep hill'),
+    'hills_terrain': (hills_height, hills_rocks, HILLS_GOALS,
+                      'Rolling hills with steep mounds and boulder clusters'),
+}
 
 
 def write_obj(path, xs, ys, zs):
@@ -90,21 +150,21 @@ ROCK_TEMPLATE = """
     </link>"""
 
 
-def write_model_sdf(path, rocks):
+def write_model(model_dir, name, description, rocks):
     links = ''.join(ROCK_TEMPLATE.format(i=i, x=x, y=y, z=z, r=r)
                     for i, (x, y, r, z) in enumerate(rocks))
-    with open(path, 'w') as f:
+    with open(os.path.join(model_dir, 'model.sdf'), 'w') as f:
         f.write(f"""<?xml version="1.0"?>
 <sdf version="1.8">
-  <model name="outdoor_terrain">
+  <model name="{name}">
     <static>true</static>
     <link name="ground">
       <collision name="collision">
-        <geometry><mesh><uri>model://outdoor_terrain/meshes/terrain.obj</uri></mesh></geometry>
+        <geometry><mesh><uri>model://{name}/meshes/terrain.obj</uri></mesh></geometry>
         <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
       </collision>
       <visual name="visual">
-        <geometry><mesh><uri>model://outdoor_terrain/meshes/terrain.obj</uri></mesh></geometry>
+        <geometry><mesh><uri>model://{name}/meshes/terrain.obj</uri></mesh></geometry>
         <material>
           <ambient>0.35 0.42 0.25 1</ambient>
           <diffuse>0.42 0.50 0.30 1</diffuse>
@@ -115,71 +175,77 @@ def write_model_sdf(path, rocks):
   </model>
 </sdf>
 """)
-    with open(os.path.join(os.path.dirname(path), 'model.config'), 'w') as f:
-        f.write("""<?xml version="1.0"?>
+    with open(os.path.join(model_dir, 'model.config'), 'w') as f:
+        f.write(f"""<?xml version="1.0"?>
 <model>
-  <name>outdoor_terrain</name>
+  <name>{name}</name>
   <version>1.0</version>
   <sdf version="1.8">model.sdf</sdf>
-  <description>80 m x 80 m test terrain: rock field, ditch, gentle ridge, steep hill.</description>
+  <description>{description} (80 m x 80 m).</description>
 </model>
 """)
 
 
-SCENARIOS = """# Generated by scripts/generate_terrain.py
-# Start pose (x, y, yaw) and goal (x, y) for each test area, in world frame.
-# The robot spawns at the start, so odom == world at t = 0.
-scenarios:
-  rock_field:   {start: [-30.0,  20.0, 0.0], goal: [-10.0,  20.0]}
-  ditch:        {start: [ 10.0,  20.0, 0.0], goal: [ 30.0,  20.0]}
-  gentle_ridge: {start: [-30.0, -20.0, 0.0], goal: [ -6.0, -20.0]}
-  steep_hill:   {start: [  8.0, -20.0, 0.0], goal: [ 32.0, -20.0]}
-"""
+def write_goals(path, entries):
+    lines = ['goals:']
+    for world, name, (sx, sy, sz), (gx, gy) in entries:
+        lines.append(f'  - {{world: {world}, name: {name}, '
+                     f'start: [{sx:.1f}, {sy:.1f}, {sz:.2f}], goal: [{gx:.1f}, {gy:.1f}]}}')
+    with open(path, 'w') as f:
+        f.write('\n'.join(lines) + '\n')
 
 
 def main():
     parser = argparse.ArgumentParser(description='Generate the test worlds and benchmark goals.')
-    parser.add_argument('--preview', action='store_true', help='save a top-down PNG')
+    parser.add_argument('--preview', action='store_true', help='save docs/images/worlds.png')
     args = parser.parse_args()
 
     pkg = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    model_dir = os.path.join(pkg, 'models', 'outdoor_terrain')
-    os.makedirs(os.path.join(model_dir, 'meshes'), exist_ok=True)
-
     n = int(round(SIZE / RES)) + 1
     xs = np.linspace(-SIZE / 2, SIZE / 2, n)
-    ys = np.linspace(-SIZE / 2, SIZE / 2, n)
-    X, Y = np.meshgrid(xs, ys)
-    Z = height(X, Y)
+    X, Y = np.meshgrid(xs, xs)
 
-    rocks = rock_field(np.random.default_rng(SEED))
-    rocks = [(x, y, r, z + float(height(np.array(x), np.array(y))))
-             for x, y, r, z in rocks]
+    goal_entries, previews = [], []
+    for name, (height_fn, rocks_fn, goals, description) in TERRAINS.items():
+        model_dir = os.path.join(pkg, 'models', name)
+        os.makedirs(os.path.join(model_dir, 'meshes'), exist_ok=True)
+        Z = height_fn(X, Y)
+        ground = lambda x, y: float(height_fn(np.array(x), np.array(y)))
+        rocks = [(x, y, r, z + ground(x, y)) for x, y, r, z in rocks_fn()]
+        write_obj(os.path.join(model_dir, 'meshes', 'terrain.obj'), xs, xs, Z)
+        write_model(model_dir, name, description, rocks)
+        for goal_name, (sx, sy), g in goals:
+            goal_entries.append((name, goal_name, (sx, sy, ground(sx, sy) + 0.3), g))
 
-    write_obj(os.path.join(model_dir, 'meshes', 'terrain.obj'), xs, ys, Z)
-    write_model_sdf(os.path.join(model_dir, 'model.sdf'), rocks)
-    with open(os.path.join(pkg, 'config', 'scenarios.yaml'), 'w') as f:
-        f.write(SCENARIOS)
+        gy, gx = np.gradient(Z, RES)
+        slope = np.degrees(np.arctan(np.hypot(gx, gy)))
+        print(f'{name}: {n}x{n} vertices, z in [{Z.min():.2f}, {Z.max():.2f}] m, '
+              f'max slope {slope.max():.1f} deg, {len(rocks)} rocks')
+        previews.append((name, Z, rocks, goals))
 
-    gy, gx = np.gradient(Z, RES)
-    slope = np.degrees(np.arctan(np.hypot(gx, gy)))
-    print(f'mesh: {n}x{n} vertices, z in [{Z.min():.2f}, {Z.max():.2f}] m, '
-          f'max slope {slope.max():.1f} deg, {len(rocks)} rocks')
+    write_goals(os.path.join(pkg, 'config', 'goals.yaml'), goal_entries)
 
     if args.preview:
         import matplotlib
         matplotlib.use('Agg')
         import matplotlib.pyplot as plt
-        fig, ax = plt.subplots(figsize=(7, 6))
-        im = ax.imshow(Z, origin='lower', extent=[xs[0], xs[-1], ys[0], ys[-1]], cmap='terrain')
-        for x, y, r, _ in rocks:
-            ax.add_patch(plt.Circle((x, y), r, color='k'))
-        fig.colorbar(im, label='height [m]')
-        ax.set_xlabel('x [m]')
-        ax.set_ylabel('y [m]')
-        out = os.path.join(os.path.dirname(pkg), 'docs', 'images', 'terrain_map.png')
+        fig, axes = plt.subplots(1, 2, figsize=(13, 6))
+        for ax, (name, Z, rocks, goals) in zip(axes, previews):
+            im = ax.imshow(Z, origin='lower', extent=[xs[0], xs[-1], xs[0], xs[-1]],
+                           cmap='terrain')
+            for x, y, r, _ in rocks:
+                ax.add_patch(plt.Circle((x, y), r, color='k'))
+            for goal_name, (sx, sy), (gx, gy) in goals:
+                ax.annotate('', (gx, gy), (sx, sy),
+                            arrowprops=dict(arrowstyle='->', color='crimson', lw=1.5))
+                ax.text(sx, sy + 1.2, goal_name, fontsize=7, color='crimson')
+            ax.set_title(name)
+            ax.set_xlabel('x [m]')
+            ax.set_ylabel('y [m]')
+            fig.colorbar(im, ax=ax, fraction=0.046, label='height [m]')
+        out = os.path.join(os.path.dirname(pkg), 'docs', 'images', 'worlds.png')
         os.makedirs(os.path.dirname(out), exist_ok=True)
-        fig.savefig(out, dpi=120, bbox_inches='tight')
+        fig.savefig(out, dpi=110, bbox_inches='tight')
         print('preview:', out)
 
 
