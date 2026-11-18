@@ -1,0 +1,5 @@
+<library path="terrain_costmap_plugin">
+  <class type="terrain_costmap_plugin::TraversabilityLayer" base_class_type="nav2_costmap_2d::Layer">
+    <description>Costmap layer built from a grid_map traversability layer (slope, roughness, step height).</description>
+  </class>
+</library>
