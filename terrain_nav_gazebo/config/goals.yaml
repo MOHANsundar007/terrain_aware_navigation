@@ -1,11 +1,7 @@
 goals:
   - {world: outdoor_terrain, name: rock_field, start: [-30.0, 20.0, 0.30], goal: [-10.0, 20.0]}
-  - {world: outdoor_terrain, name: rock_field_diag, start: [-30.0, 12.0, 0.29], goal: [-10.0, 27.0]}
   - {world: outdoor_terrain, name: ditch, start: [10.0, 20.0, 0.28], goal: [30.0, 20.0]}
-  - {world: outdoor_terrain, name: gentle_ridge, start: [-30.0, -20.0, 0.31], goal: [-6.0, -20.0]}
   - {world: outdoor_terrain, name: steep_hill, start: [8.0, -20.0, 0.31], goal: [32.0, -20.0]}
   - {world: hills_terrain, name: steep_mound, start: [-30.0, -25.0, 0.80], goal: [-6.0, -25.0]}
   - {world: hills_terrain, name: boulders, start: [-30.0, -5.0, 1.67], goal: [-6.0, -5.0]}
   - {world: hills_terrain, name: rolling_hills, start: [-30.0, 15.0, 0.33], goal: [-6.0, 15.0]}
-  - {world: hills_terrain, name: twin_mounds, start: [6.0, -25.0, 0.76], goal: [30.0, -25.0]}
-  - {world: hills_terrain, name: mound_and_rocks, start: [4.0, 5.0, 0.54], goal: [32.0, 5.0]}

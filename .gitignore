@@ -10,6 +10,8 @@ __pycache__/
 *.swp
 .DS_Store
 
-results/
+benchmark_results/
 *.bag
 *.db3
+docs/results/logs/
+docs/results/tracks.json

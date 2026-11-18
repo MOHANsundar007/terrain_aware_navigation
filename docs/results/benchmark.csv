@@ -1,0 +1,13 @@
+world,goal,mode,outcome,success,path_length_m,straight_line_m,max_tilt_deg,time_s,final_error_m
+outdoor_terrain,rock_field,default,stuck,False,12.08,20.0,30.5,65.8,8.83
+outdoor_terrain,rock_field,terrain,reached,True,25.41,20.0,2.0,68.8,0.47
+outdoor_terrain,ditch,default,tipped,False,9.45,20.0,60.4,24.1,11.2
+outdoor_terrain,ditch,terrain,reached,True,32.88,20.0,2.1,93.9,0.62
+outdoor_terrain,steep_hill,default,reached,True,27.15,24.0,19.4,67.6,1.18
+outdoor_terrain,steep_hill,terrain,reached,True,31.17,24.0,3.3,65.0,1.02
+hills_terrain,steep_mound,default,reached,True,25.62,24.0,23.4,62.6,1.03
+hills_terrain,steep_mound,terrain,reached,True,27.49,24.0,4.6,60.5,0.62
+hills_terrain,boulders,default,stuck,False,8.95,24.0,16.0,48.5,15.59
+hills_terrain,boulders,terrain,reached,True,28.44,24.0,6.5,68.3,0.53
+hills_terrain,rolling_hills,default,reached,True,23.84,24.0,2.3,56.5,0.88
+hills_terrain,rolling_hills,terrain,reached,True,24.22,24.0,2.3,53.8,0.31
